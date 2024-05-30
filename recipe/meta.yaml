@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   number: 0
 
 requirements:
@@ -41,7 +41,11 @@ about:
   license_file: LICENSE
 
 extra:
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/49247
+    reason: Dependency for gstools
   recipe-maintainers:
+    - ianaobi
     - ericdill
     - tacaswell
     - licode
