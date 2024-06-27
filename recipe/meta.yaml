@@ -10,20 +10,20 @@ source:
   sha256: 8e0e19dc8bcef9c6d02f860bef8ddc6c876b8878a6ce666943e2c5cfd9317fed
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  skip: True  # [py<39]
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
     - setuptools >=40.6.0
     - setuptools-scm
     - wheel
   run:
     - numpy
-    - python >=3.6
+    - python
 
 test:
   imports:
@@ -36,9 +36,15 @@ test:
 about:
   home: https://emcee.readthedocs.io
   summary: The Python ensemble sampling toolkit for MCMC
-  dev_url: https://github.com/dfm/emcee
+  description: |
+    emcee is a stable, well tested Python implementation of the
+    affine-invariant ensemble sampler for Markov chain Monte Carlo (MCMC)
+    proposed by Goodman & Weare (2010).
   license: MIT
   license_file: LICENSE
+  license_family: MIT
+  dev_url: https://github.com/dfm/emcee
+  doc_url: https://emcee.readthedocs.io
 
 extra:
   recipe-maintainers:
