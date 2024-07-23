@@ -22,8 +22,8 @@ requirements:
     - setuptools-scm
     - wheel
   run:
-    - numpy
     - python
+    - {{ pin_compatible('numpy') }}
 
 test:
   imports:
@@ -34,6 +34,9 @@ test:
   commands:
     - pip check
     - pytest -v --pyargs emcee
+    # skip test_indexing on osx-64 because numpy version
+    # 'numpy.testing.assert_allclose' introduced in numpy 1.5
+    - pytest -v --pyargs emcee -k "not test_indexing"  # [osx and x86_64]
 
 about:
   home: https://emcee.readthedocs.io
