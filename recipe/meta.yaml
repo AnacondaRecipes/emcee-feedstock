@@ -10,9 +10,9 @@ source:
   sha256: 8e0e19dc8bcef9c6d02f860bef8ddc6c876b8878a6ce666943e2c5cfd9317fed
 
 build:
+  number: 1
+  skip: True  # [py<38]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
-  skip: True  # [py<39]
 
 requirements:
   host:
@@ -22,16 +22,18 @@ requirements:
     - setuptools-scm
     - wheel
   run:
-    - numpy
     - python
+    - numpy
 
 test:
   imports:
     - emcee
-  commands:
-    - pip check
   requires:
     - pip
+    - pytest
+  commands:
+    - pip check
+    - pytest -v --pyargs emcee
 
 about:
   home: https://emcee.readthedocs.io
